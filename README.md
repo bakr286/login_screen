@@ -1,6 +1,6 @@
 # login_screen
 
-A new Flutter project.
+A Functional login screen where the email is dynamic and the password is 12345
 
 ## Getting Started
 
