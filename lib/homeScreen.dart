@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -5,11 +6,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-         Scaffold(
+    return Scaffold(
         backgroundColor: Colors.blue,
         appBar: AppBar(
-          backgroundColor: Colors.black,
           title: Text("Home Screen",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize:30 )),
           centerTitle: true,
         ),
@@ -24,7 +23,7 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Container(
-                  decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(10)),
+                   decoration: BoxDecoration(color:CupertinoColors.darkBackgroundGray,borderRadius: BorderRadius.circular(10)),
                   width: double.infinity,
                   height: 40 ,
                   child: Row(
@@ -41,15 +40,31 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Container(
-                  decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(color:CupertinoColors.darkBackgroundGray,borderRadius: BorderRadius.circular(10)),
                   width: double.infinity,
-                  height: 40 ,
+                  height: 40,
                   child: Row(
                     children: [
                       SizedBox(width: 15,),
                       Icon(Icons.mail),
                       SizedBox(width: 15,),
                       SelectableText("ahmed.abobakr1111111@gmail.com",style: TextStyle(fontSize: 18),),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Container(
+                  decoration: BoxDecoration(color:CupertinoColors.darkBackgroundGray,borderRadius: BorderRadius.circular(10)),
+                  width: double.infinity,
+                  height: 40,
+                  child: Row(
+                    children: [
+                      SizedBox(width: 15,),
+                      CircleAvatar(radius: 12,),
+                      SizedBox(width: 15,),
+                      SelectableText("ahmed-ab0bakr",style: TextStyle(fontSize: 14),),
                     ],
                   ),
                 ),

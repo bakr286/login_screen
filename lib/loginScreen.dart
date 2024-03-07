@@ -1,19 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:login_screen/signupScreen.dart';
 import 'homeScreen.dart';
 
 //Controllers
 TextEditingController c_email = TextEditingController();
-TextEditingController c_password = TextEditingController();
-TextEditingController c_name = TextEditingController();
 //Variables
-bool _isDarkTheme=false;
 bool _isPasswordVisible = false;
 bool showErrorEmail = false;
 bool showErrorPassword = false;
-bool showErrorUsername = false;
-String name='';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -44,28 +41,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: const EdgeInsets.all(16),
                     child: Text('Login', style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                   ),
-//Username field
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      inputFormatters: [FilteringTextInputFormatter.deny(RegExp(r'\s')),],
-                      decoration: InputDecoration(
-                          errorText: showErrorUsername?'Username cannot be empty':null,
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-                          labelText: 'Username',
-                          prefixIcon: Icon(Icons.person),
-                          hintText: 'Enter your name'
-                      ),
-                      controller: c_name,
-                      onChanged: (_){
-                        setState(() {
-                          showErrorUsername =false;
-                          name=c_name.text;
-
-                        });
-                      },
-                    ),
-                  ),
 //Email field
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -78,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       controller:c_email ,
                       decoration: InputDecoration(
-                        errorText: showErrorEmail?'Invalid Email':null,
+                        errorText: showErrorEmail?c_email.text.isEmpty?'Email cannot be empty':(name.isEmpty)?"Please Sign up your username(email doesn't exist)":'Invalid Email':null,
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                         prefixIcon: Icon(Icons.email),
                         labelText:'E-mail' ,
@@ -100,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       controller: c_password,
                       keyboardType: TextInputType.visiblePassword,
                       decoration: InputDecoration(
-                        errorText: showErrorPassword ? 'Wrong password' : null,
+                        errorText: showErrorPassword ?(c_password.text.isEmpty)?'Password cannot be empty': 'Wrong password' : null,
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                         prefixIcon: Icon(Icons.password),
                         labelText: 'Password',
@@ -117,35 +92,48 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
 
-// Login button
-                  ElevatedButton(
-                    onPressed: () {
-                      (c_name.text.isEmpty) ? showErrorUsername = true : null;
-                      if ((c_email.text != '$name@gmail.com') || (c_password.text != '12345')) {
-                        if (c_email.text != '$name@gmail.com') {
-                          setState(() {
-                            showErrorEmail = true;
-                          });
-                        } else if (c_password.text != '12345') {
-                          setState(() {
-                            showErrorPassword = true;
-                          });
-                        }
-                      } else {
-                        setState(() {
-                          showErrorUsername = false;
-                          showErrorEmail = false;
-                          showErrorPassword = false;
-                        });
+//buttons
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          if ((c_email.text != '$name@gmail.com') || (c_password.text != password)) {
+                            if (c_email.text != '$name@gmail.com') {
+                              setState(() {
+                                showErrorEmail = true;
+                              });
+                            } else if (c_password.text != password) {
+                              setState(() {
+                                showErrorPassword = true;
+                              });
+                            }
+                          } else {
+                            setState(() {
+                              showErrorEmail = false;
+                              showErrorPassword = false;
+                              c_email.clear();
+                              c_password.clear();
+                            });
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => HomeScreen(),
+                              ),
+                            );
+                          }
+                        },
+                        child: Text('Login'),
+                      ),
+                      TextButton(onPressed: (){
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => HomeScreen(),
+                            builder: (_) => SignUpScreen(),
                           ),
                         );
-                      }
-                    },
-                    child: Text('Login'),
+                      }, child:Text('Sign up',style: TextStyle(color: Colors.blueAccent),) )
+                    ],
                   ),
                 ],
               ),
@@ -153,17 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ],
       ),
-      floatingActionButton: Builder(
-        builder: (context) => FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              _isDarkTheme = !_isDarkTheme; // Toggle theme
-            });
-            print(_isDarkTheme);
-          },
-          child: Icon(_isDarkTheme ? CupertinoIcons.moon_fill : CupertinoIcons.sun_max_fill),
-        ),
-      ),
     );
   }
 }
+
