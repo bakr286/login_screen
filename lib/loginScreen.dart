@@ -126,7 +126,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text('Login'),
                       ),
                       TextButton(onPressed: (){
-                        Navigator.push(
+                        c_password.clear();
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (_) => SignUpScreen(),
