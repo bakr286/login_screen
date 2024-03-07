@@ -1,10 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_screen/loginScreen.dart';
-
-
-bool _isDarkTheme=false;
-
 void main() {
   runApp(MyApp());
 }
