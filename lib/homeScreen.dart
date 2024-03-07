@@ -62,9 +62,12 @@ class HomeScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       SizedBox(width: 15,),
-                      CircleAvatar(radius: 12,),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Image(image: AssetImage('images/linkedin.png')),
+                      ),
                       SizedBox(width: 15,),
-                      SelectableText("ahmed-ab0bakr",style: TextStyle(fontSize: 14),),
+                      SelectableText("ahmed-ab0bakr",style: TextStyle(fontSize: 18),),
                     ],
                   ),
                 ),

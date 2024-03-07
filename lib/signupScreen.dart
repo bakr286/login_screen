@@ -119,7 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         c_password.clear();
                         showErrorPassword=false;
                         });
-                        Navigator.push(
+                        Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                             builder: (_) => LoginScreen(),
