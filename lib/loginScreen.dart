@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               c_email.clear();
                               c_password.clear();
                             });
-                            Navigator.pushReplacement(
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (_) => HomeScreen(),
